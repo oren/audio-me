@@ -1,0 +1,23 @@
+{
+  "name": "audio-me",
+  "version": "0.0.0",
+  "description": "audio-me ========",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/node-dev/bin/node-dev server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/oren/audio-me.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/oren/audio-me/issues"
+  },
+  "homepage": "https://github.com/oren/audio-me",
+  "devDependencies": {
+    "node-dev": "~2.1.4"
+  }
+}
