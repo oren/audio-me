@@ -19,5 +19,8 @@
   "homepage": "https://github.com/oren/audio-me",
   "devDependencies": {
     "node-dev": "~2.1.4"
+  },
+  "dependencies": {
+    "ecstatic": "~0.4.13"
   }
 }
