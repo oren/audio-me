@@ -1,15 +1,6 @@
 'use strict';
 
-function initAudioStream(stream) {
-    alert('got audio permission');
-}
-
-function permissionDenied(e) {
-    alert('Error getting audio');
-    console.log(e);
-}
-
-function askForAudio() {
+function html5Audio(cb) {
     if (!navigator.getUserMedia)
         navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     if (!navigator.cancelAnimationFrame)
@@ -17,7 +8,17 @@ function askForAudio() {
     if (!navigator.requestAnimationFrame)
         navigator.requestAnimationFrame = navigator.webkitRequestAnimationFrame || navigator.mozRequestAnimationFrame;
 
-    navigator.getUserMedia({audio:true}, initAudioStream, permissionDenied);
+    function success(stream) {
+        cb(null, stream)
+    }
+
+    function error(e) {
+        cb(e, null)
+    }
+
+    navigator.getUserMedia({audio:true}, success, error);
 }
 
-window.addEventListener('load', askForAudio );
+
+
+module.exports = html5Audio
