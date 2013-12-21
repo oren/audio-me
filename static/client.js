@@ -1,3 +1,5 @@
+'use strict';
+
 function initAudioStream(stream) {
     alert('got audio permission');
 }

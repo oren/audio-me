@@ -21,6 +21,7 @@
     "node-dev": "~2.1.4"
   },
   "dependencies": {
-    "st": "~0.2.3"
+    "st": "~0.2.3",
+    "browserify": "~3.12.0"
   }
 }
