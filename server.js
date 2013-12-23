@@ -3,7 +3,7 @@ var fs = require('fs');
 var st = require('st');
 var indexHtml = fs.readFileSync(__dirname + '/index.html');
 
-var mount = st({ path: __dirname + '/static', url: '/static' });
+var mount = st({ path: __dirname + '/static', url: '/static', cache: false });
 http.createServer(function (req, res) {
     // serve the static assets from public
     var staticFile = mount(req, res);
