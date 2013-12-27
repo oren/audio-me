@@ -1,59 +1,3 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
-
-function html5Audio(cb) {
-    if (!navigator.getUserMedia)
-        navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-    if (!navigator.cancelAnimationFrame)
-        navigator.cancelAnimationFrame = navigator.webkitCancelAnimationFrame || navigator.mozCancelAnimationFrame;
-    if (!navigator.requestAnimationFrame)
-        navigator.requestAnimationFrame = navigator.webkitRequestAnimationFrame || navigator.mozRequestAnimationFrame;
-
-    function success(stream) {
-        cb(null, stream)
-    }
-
-    function error(e) {
-        cb(e, null)
-    }
-
-    navigator.getUserMedia({audio:true}, success, error);
-}
-
-
-
-module.exports = html5Audio
-
-},{}],2:[function(require,module,exports){
-'use strict';
-var html5Audio = require('./html5audio.js');
-var Recorder = require('./recorder.js');
-
-window.AudioContext = window.AudioContext ||
-                          window.webkitAudioContext;
-
-window.context = new AudioContext();
-var inputPoint;
-
-function initAudio(err, stream) {
-    if (err) { alert('Permission for Audio denied'); }
-    console.log('Audio stream', stream);
-    inputPoint = context.createGain();
-    var microphone = context.createMediaStreamSource(stream);
-    microphone.connect(inputPoint);
-    audioRecorder = new Recorder( inputPoint );
-    zeroGain = audioContext.createGain();
-    zeroGain.gain.value = 0.0;
-    inputPoint.connect( zeroGain );
-    zeroGain.connect( audioContext.destination );
-}
-
-window.addEventListener('load', function(e) {
-    console.log('Asking for audio');
-    html5Audio(initAudio);
-});
-
-},{"./html5audio.js":1,"./recorder.js":3}],3:[function(require,module,exports){
 'use strict';
 // source: https://raw.github.com/mattdiamond/Recorderjs
 var WORKER_PATH = 'recorderWorker.js';
@@ -141,5 +85,3 @@ Recorder.forceDownload = function (blob, filename) {
 
 module.exports = Recorder;
 
-
-},{}]},{},[2])
