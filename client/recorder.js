@@ -1,6 +1,6 @@
 'use strict';
 // source: https://raw.github.com/mattdiamond/Recorderjs
-var WORKER_PATH = 'recorderWorker.js';
+var WORKER_PATH = '/static/recorderWorker.js';
 
 var Recorder = function(source, cfg){
     var config = cfg || {};
