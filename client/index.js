@@ -39,7 +39,7 @@ window.addEventListener('load', function(e) {
 });
 
 function initAudio(err, stream) {
-    if (err) { alert('Permission for Audio denied'); }
+    if (err) { console.log('Permission for Audio denied'); return; }
     console.log('Audio stream', stream);
 
     inputPoint = context.createGain();
@@ -49,7 +49,7 @@ function initAudio(err, stream) {
     recorder = new Recorder(inputPoint);
 
     var zeroGain = context.createGain();
-    zeroGain.gain.value = 1.0;
+    zeroGain.gain.value = 0.0;
     inputPoint.connect( zeroGain );
     zeroGain.connect( context.destination );
 }
