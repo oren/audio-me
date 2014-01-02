@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "browserify": "./scripts/watch client/ 'browserify client/index.js > static/bundle.min.js",
+    "build-js": "browserify client/index.js -o static/bundle.min.js",
+    "watch-js": "watchify client/index.js -o static/bundle.min.js",
     "start": "./node_modules/node-dev/bin/node-dev server.js"
   },
   "repository": {
@@ -21,7 +22,9 @@
   "devDependencies": {
     "node-dev": "~2.1.4",
     "node-watch": "~0.3.4",
-    "node-getopt": "~0.2.3"
+    "node-getopt": "~0.2.3",
+    "watchify": "~0.5.0",
+    "webworkify": "~0.1.0"
   },
   "dependencies": {
     "st": "~0.2.3",

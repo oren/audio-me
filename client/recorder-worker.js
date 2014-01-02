@@ -3,24 +3,26 @@ var recLength = 0,
   recBuffersR = [],
   sampleRate;
 
-this.onmessage = function(e){
-  switch(e.data.command){
-    case 'init':
-      init(e.data.config);
-      break;
-    case 'record':
-      record(e.data.buffer);
-      break;
-    case 'exportWAV':
-      exportWAV(e.data.type);
-      break;
-    case 'getBuffer':
-      getBuffer();
-      break;
-    case 'clear':
-      clear();
-      break;
-  }
+module.exports = function () {
+    this.onmessage = function(e){
+      switch(e.data.command){
+        case 'init':
+          init(e.data.config);
+          break;
+        case 'record':
+          record(e.data.buffer);
+          break;
+        case 'exportWAV':
+          exportWAV(e.data.type);
+          break;
+        case 'getBuffer':
+          getBuffer();
+          break;
+        case 'clear':
+          clear();
+          break;
+      }
+    };
 };
 
 function init(config){
@@ -31,6 +33,7 @@ function record(inputBuffer){
   recBuffersL.push(inputBuffer[0]);
   recBuffersR.push(inputBuffer[1]);
   recLength += inputBuffer[0].length;
+  console.log(inputBuffer);
 }
 
 function exportWAV(type){

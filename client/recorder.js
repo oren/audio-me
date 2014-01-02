@@ -1,13 +1,14 @@
 'use strict';
 // source: https://raw.github.com/mattdiamond/Recorderjs
-var WORKER_PATH = '/static/recorderWorker.js';
+var work = require('webworkify');
 
 var Recorder = function(source, cfg){
     var config = cfg || {};
     var bufferLen = config.bufferLen || 4096;
     this.context = source.context;
     this.node = this.context.createJavaScriptNode(bufferLen, 2, 2);
-    var worker = new Worker(config.workerPath || WORKER_PATH);
+    var worker = work(require('./recorder-worker.js'));
+
     worker.postMessage({
         command: 'init',
         config: {
