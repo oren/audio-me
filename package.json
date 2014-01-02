@@ -28,6 +28,8 @@
   },
   "dependencies": {
     "st": "~0.2.3",
-    "browserify": "~3.12.0"
+    "browserify": "~3.12.0",
+    "shoe": "0.0.15",
+    "through": "~2.3.4"
   }
 }
