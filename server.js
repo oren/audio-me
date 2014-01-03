@@ -14,11 +14,9 @@ var server = http.createServer(function (req, res) {
     res.end(indexHtml);
 }).listen(3000, '127.0.0.1');
 
+var fstream = fs.createWriteStream('tmp/foo.wav');
 var sock = shoe(function (stream) {
-    stream.on('connection', function () {
-        console.log('connected');
-    });
-    stream.pipe(process.stdout, { end : false });
+    stream.pipe(fstream, { end : false });
 });
 
 sock.install(server, '/record');
