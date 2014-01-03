@@ -6,9 +6,9 @@ audio-me
  ## Usage
  ````
  npm install
- browserify client/index.js > static/bundle.min.js
+ npm run build-js
  npm start
  ````
- 
+
  In your browser visit: [http://localhost:3000](http://localhost:3000)
- 
+
