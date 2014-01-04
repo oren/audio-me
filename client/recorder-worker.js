@@ -27,6 +27,7 @@ module.exports = function () {
 };
 
 function init(config) {
+    console.log(config.sampleRate);
   sampleRate = config.sampleRate;
 }
 
@@ -49,10 +50,12 @@ function exportWAV(type){
 }
 
 function getBuffer() {
-  var buffers = [];
-  buffers.push( mergeBuffers(recBuffersL, recLength) );
-  buffers.push( mergeBuffers(recBuffersR, recLength) );
-  self.postMessage(buffers);
+  var bufferL = mergeBuffers(recBuffersL, recLength);
+  var bufferR = mergeBuffers(recBuffersR, recLength);
+  var interleaved = interleave(bufferL, bufferR);
+  var dataview = encodeWAV(interleaved);
+
+  self.postMessage(dataview.buffer);
 }
 
 function clear(){

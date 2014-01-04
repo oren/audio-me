@@ -2,6 +2,8 @@
 var html5Audio = require('./html5audio.js');
 var Recorder = require('./recorder.js');
 var recorder;
+var shoe = require('shoe');
+var saveAs = require('filesaver.js');
 
 window.AudioContext = window.AudioContext ||
                           window.webkitAudioContext;
@@ -11,6 +13,7 @@ var inputPoint, microphone;
 var recordBtn;
 var stopBtn;
 var playBtn;
+var exportBtn;
 
 window.addEventListener('load', function(e) {
     console.log('Asking for audio');
@@ -20,6 +23,7 @@ window.addEventListener('load', function(e) {
     recordBtn = document.getElementById('btn-record');
     stopBtn = document.getElementById('btn-stop');
     playBtn = document.getElementById('btn-play');
+    exportBtn = document.getElementById('btn-export');
 
     recordBtn.addEventListener('click', function(e) {
         recorder.record();
@@ -33,7 +37,12 @@ window.addEventListener('load', function(e) {
 
     playBtn.addEventListener('click', function(e) {
         console.log('play');
-        recorder.getBuffer(getBufferCallback);
+        recorder.getBuffer(sendToServer);
+    });
+
+    exportBtn.addEventListener('click', function(e) {
+        console.log('export');
+        recorder.exportWAV(exportWav);
     });
 
 });
@@ -54,14 +63,28 @@ function initAudio(err, stream) {
     zeroGain.connect( context.destination );
 }
 
-function getBufferCallback(buffers) {
-    console.log(buffers);
-    var newSource = context.createBufferSource();
-    var newBuffer = context.createBuffer( 2, buffers[0].length, context.sampleRate );
-    newBuffer.getChannelData(0).set(buffers[0]);
-    newBuffer.getChannelData(1).set(buffers[1]);
-    newSource.buffer = newBuffer;
+var stream;
+stream = shoe('/record');
+console.log(stream);
+window.stream = stream;
 
-    newSource.connect( context.destination );
-    newSource.start(0);
+function sendToServer(buffer) {
+    var base64 = arrayBufferToBase64(buffer);
+    stream.write(base64);
+}
+
+function arrayBufferToBase64( buffer ) {
+    var binary = ''
+    var bytes = new Uint8Array( buffer )
+    var len = bytes.byteLength;
+    for (var i = 0; i < len; i++) {
+        binary += String.fromCharCode( bytes[ i ] )
+    }
+    return window.btoa( binary );
+}
+
+
+function exportWav(blob) {
+    console.log('export');
+    saveAs(blob, 'client-foo.wav');
 }

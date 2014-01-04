@@ -1,11 +1,6 @@
 'use strict';
 // source: https://raw.github.com/mattdiamond/Recorderjs
 var work = require('webworkify');
-var shoe = require('shoe');
-var through = require('through');
-var stream;
-var filename;
-var Buffer = require('buffer').Buffer;
 
 var Recorder = function(source, cfg){
     var config = cfg || {};
@@ -20,10 +15,6 @@ var Recorder = function(source, cfg){
             sampleRate: this.context.sampleRate
         }
     });
-    stream = shoe('/record');
-    console.log(stream);
-    stream.write('hello');
-    window.stream = stream;
 
     var recording = false;
     var currCallback;
@@ -32,10 +23,12 @@ var Recorder = function(source, cfg){
         if (!recording) return;
         var left = e.inputBuffer.getChannelData(0);
         var right = e.inputBuffer.getChannelData(1);
-        var samples = interleave(left, right);
-        var buffer = new Buffer(samples);
-        console.log(buffer.toString('base64'));
-        stream.write(buffer.toString('base64'));
+        var buffer = [left, right];
+
+        worker.postMessage({
+            command: 'record',
+            buffer: buffer
+        });
     };
 
     this.configure = function (cfg) {
@@ -47,7 +40,6 @@ var Recorder = function(source, cfg){
     }
 
     this.record = function () {
-        filename = Date.now(); 
         recording = true;
     }
 
@@ -91,29 +83,6 @@ Recorder.forceDownload = function (blob, filename) {
     var click = document.createEvent("Event");
     click.initEvent("click", true, true);
     link.dispatchEvent(click);
-}
-
-
-function interleave(inputL, inputR){
-  var length = inputL.length + inputR.length;
-  var result = new Float32Array(length);
-
-  var index = 0,
-    inputIndex = 0;
-
-  while (index < length){
-    result[index++] = inputL[inputIndex];
-    result[index++] = inputR[inputIndex];
-    inputIndex++;
-  }
-  return result;
-}
-
-function floatTo16BitPCM(output, offset, input){
-  for (var i = 0; i < input.length; i++, offset+=2){
-    var s = Math.max(-1, Math.min(1, input[i]));
-    output.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
-  }
 }
 
 module.exports = Recorder;
