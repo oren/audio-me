@@ -23,3 +23,6 @@ audio-me
     cordova create Hello com.example.hello "Hello"
     cd Hello
     cordova platform add android
+    cordova build
+    cordova emulate android   # run in emulator
+    cordova run android       # run on actual device (connected with usb)

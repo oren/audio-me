@@ -1,0 +1,25 @@
+/Users/zod/projects/audio-me/Hello/platforms/android/bin/Hello.ap_ \
+ : /Users/zod/projects/audio-me/Hello/platforms/android/res/drawable/icon.png \
+/Users/zod/projects/audio-me/Hello/platforms/android/res/drawable-hdpi/icon.png \
+/Users/zod/projects/audio-me/Hello/platforms/android/res/drawable-ldpi/icon.png \
+/Users/zod/projects/audio-me/Hello/platforms/android/res/drawable-mdpi/icon.png \
+/Users/zod/projects/audio-me/Hello/platforms/android/res/drawable-xhdpi/icon.png \
+/Users/zod/projects/audio-me/Hello/platforms/android/res/values/strings.xml \
+/Users/zod/projects/audio-me/Hello/platforms/android/res/xml/config.xml \
+/Users/zod/projects/audio-me/Hello/platforms/android/bin/res/drawable/icon.png \
+/Users/zod/projects/audio-me/Hello/platforms/android/bin/res/drawable-hdpi/icon.png \
+/Users/zod/projects/audio-me/Hello/platforms/android/bin/res/drawable-ldpi/icon.png \
+/Users/zod/projects/audio-me/Hello/platforms/android/bin/res/drawable-mdpi/icon.png \
+/Users/zod/projects/audio-me/Hello/platforms/android/bin/res/drawable-xhdpi/icon.png \
+/Users/zod/projects/audio-me/Hello/platforms/android/assets/www \
+/Users/zod/projects/audio-me/Hello/platforms/android/assets/www/config.xml \
+/Users/zod/projects/audio-me/Hello/platforms/android/assets/www/cordova.js \
+/Users/zod/projects/audio-me/Hello/platforms/android/assets/www/cordova_plugins.js \
+/Users/zod/projects/audio-me/Hello/platforms/android/assets/www/css \
+/Users/zod/projects/audio-me/Hello/platforms/android/assets/www/img \
+/Users/zod/projects/audio-me/Hello/platforms/android/assets/www/index.html \
+/Users/zod/projects/audio-me/Hello/platforms/android/assets/www/js \
+/Users/zod/projects/audio-me/Hello/platforms/android/assets/www/css/index.css \
+/Users/zod/projects/audio-me/Hello/platforms/android/assets/www/img/logo.png \
+/Users/zod/projects/audio-me/Hello/platforms/android/assets/www/js/index.js \
+/Users/zod/projects/audio-me/Hello/platforms/android/bin/AndroidManifest.xml \
