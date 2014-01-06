@@ -16,7 +16,7 @@ audio-me
 
     wget http://dl.google.com/android/android-sdk_r22.3-macosx.zip
     tar android-sdk_r22.3-macosx.zip
-    export PATH=${PATH}:/Users/ogolan/misc/apps/android-sdk-macosx/platform-tools:/Users/ogolan/misc/apps/android-sdk-macosx/tools
+    export PATH=${PATH}:/Users/ogolan/apps/android-sdk-macosx/platform-tools:/Users/ogolan/apps/android-sdk-macosx/tools
 
     sudo npm install -g cordova
     cordova create Hello com.example.hello "Hello"
