@@ -1,9 +1,6 @@
 'use strict';
 // source: https://raw.github.com/mattdiamond/Recorderjs
 var work = require('webworkify');
-var shoe = require('shoe');
-var through = require('through');
-var stream;
 
 var Recorder = function(source, cfg){
     var config = cfg || {};
@@ -18,25 +15,20 @@ var Recorder = function(source, cfg){
             sampleRate: this.context.sampleRate
         }
     });
-    stream = shoe('/record');
-    console.log(stream);
-    stream.write('hello');
-    window.stream = stream;
 
     var recording = false;
     var currCallback;
 
     this.node.onaudioprocess = function (e) {
         if (!recording) return;
-        var buffer = [
-                e.inputBuffer.getChannelData(0),
-                e.inputBuffer.getChannelData(1)
-        ];
+        var left = e.inputBuffer.getChannelData(0);
+        var right = e.inputBuffer.getChannelData(1);
+        var buffer = [left, right];
+
         worker.postMessage({
             command: 'record',
             buffer: buffer
         });
-        stream.write(buffer);
     };
 
     this.configure = function (cfg) {
@@ -48,7 +40,7 @@ var Recorder = function(source, cfg){
     }
 
     this.record = function () {
-      recording = true;
+        recording = true;
     }
 
     this.stop = function () {
